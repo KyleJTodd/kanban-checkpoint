@@ -1,6 +1,8 @@
 import BoardService from '../services/BoardService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
+import ListService from '../services/ListService'
+
 
 //import service and create an instance
 let _service = new BoardService()
@@ -10,9 +12,10 @@ let _repo = _service.repository
 export default class BoardsController {
   constructor() {
     this.router = express.Router()
-      .get('', this.getAll)
-      .get(':id', this.getById)
       .use(Authorize.authenticated)
+      .get('', this.getAll)
+      .get('/:id', this.getById)
+      .get('/:id/lists', this.getListByBoardId)
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
@@ -20,7 +23,11 @@ export default class BoardsController {
   }
 
   defaultRoute(req, res, next) {
-    next({ status: 404, message: 'No Such Route' })
+    next({ status: 404, message: 'No Such Board Route' })
+  }
+  async getListByBoardId(req, res, next) {
+    let data = await _repo.find({ _id: req.params.id })
+    return res.send(data)
   }
 
   async getAll(req, res, next) {
