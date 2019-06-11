@@ -11,7 +11,8 @@ export default class ListsController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAll)
-      .get('/:id', this.getByBoardId)
+      .get('/:id', this.getById)
+      .get('/:id/tasks', this.getTaskByListId)
       .use(Authorize.authenticated)
       .post('', this.create)
       .put('/:id', this.edit)
@@ -32,7 +33,16 @@ export default class ListsController {
     catch (err) { next(err) }
   }
 
-  async getByBoardId(req, res, next) {
+  async getTaskByListId(req, res, next) {
+    try {
+      //only gets Tasks by user who is logged in
+      let data = await _repo.find({ listId: req.params.id })
+      return res.send(data)
+    }
+    catch (err) { next(err) }
+  }
+
+  async getById(req, res, next) {
     try {
       let data = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
       return res.send(data)

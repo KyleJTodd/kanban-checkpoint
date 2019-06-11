@@ -11,7 +11,7 @@ export default class TasksController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAll)
-      .get('/:id', this.getByListId)
+      .get('/:id', this.getById)
       .use(Authorize.authenticated)
       .post('', this.create)
       .put('/:id', this.edit)
@@ -32,7 +32,7 @@ export default class TasksController {
     catch (err) { next(err) }
   }
 
-  async getByListId(req, res, next) {
+  async getById(req, res, next) {
     try {
       let data = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
       return res.send(data)

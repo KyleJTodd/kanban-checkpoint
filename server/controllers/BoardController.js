@@ -12,10 +12,10 @@ let _repo = _service.repository
 export default class BoardsController {
   constructor() {
     this.router = express.Router()
-      .use(Authorize.authenticated)
       .get('', this.getAll)
       .get('/:id', this.getById)
       .get('/:id/lists', this.getListByBoardId)
+      .use(Authorize.authenticated)
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
