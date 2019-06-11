@@ -41,7 +41,9 @@ server.use('/auth', new AuthController().router)
 
 //YOUR ROUTES HERE!!!!!!
 import BoardController from './controllers/BoardController'
+import ListController from './controllers/ListController'
 server.use('/api/boards', new BoardController().router)
+server.use('/api/boards/:id/list', new ListController().router)
 
 
 

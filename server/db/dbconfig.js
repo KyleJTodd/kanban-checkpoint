@@ -2,7 +2,7 @@
 import mongoose from 'mongoose'
 
 //THIS STRING WILL CHANGE SLIGHTLY
-const connectionString = ""
+const connectionString = "mongodb://student:student123@cluster0-shard-00-00-r7urd.mongodb.net:27017,cluster0-shard-00-01-r7urd.mongodb.net:27017,cluster0-shard-00-02-r7urd.mongodb.net:27017/kanban?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 let connection = mongoose.connection
 

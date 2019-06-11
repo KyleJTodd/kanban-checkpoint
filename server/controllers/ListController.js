@@ -1,17 +1,17 @@
-import BoardService from '../services/BoardService'
+import ListService from '../services/ListService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 
 //import service and create an instance
-let _service = new BoardService()
+let _service = new ListService()
 let _repo = _service.repository
 
 //PUBLIC
-export default class BoardsController {
+export default class ListsController {
   constructor() {
     this.router = express.Router()
       .get('', this.getAll)
-      .get(':id', this.getById)
+      .get('/:id', this.getByBoardId)
       .use(Authorize.authenticated)
       .post('', this.create)
       .put('/:id', this.edit)
@@ -25,13 +25,14 @@ export default class BoardsController {
 
   async getAll(req, res, next) {
     try {
+      //only gets Lists by user who is logged in
       let data = await _repo.find({ authorId: req.session.uid })
       return res.send(data)
     }
     catch (err) { next(err) }
   }
 
-  async getById(req, res, next) {
+  async getByBoardId(req, res, next) {
     try {
       let data = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
       return res.send(data)

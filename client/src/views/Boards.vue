@@ -1,15 +1,38 @@
 <template>
-  <div class="boards">
-    WELCOME TO THE BOARDS!!!
-    <form @submit.prevent="addBoard">
-      <input type="text" placeholder="title" v-model="newBoard.title" required>
-      <input type="text" placeholder="description" v-model="newBoard.description">
-      <button type="submit">Create Board</button>
-    </form>
-    <div v-for="board in boards" :key="board._id">
-      <router-link :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}</router-link>
-      <button @click="deleteBoard(board._id)">DELETE BOARD</button>
+  <div class="boards container-fluid">
+    <div class="row justify-content-center">
+      <div class="col align-self-center">
+        <h1 class="text-center">Time to Branch Out</h1>
+      </div>
     </div>
+    <div class="row justify-content-center">
+      <form @submit.prevent="addBoard">
+        <input type="text" placeholder="title" v-model="newBoard.title" required>
+        <input type="text" placeholder="description" v-model="newBoard.description">
+        <button type="submit">Create New Branch</button>
+      </form>
+    </div>
+    <div class="row justify-content-center mt-5">
+      <div class="col-2 rounded-circle p-3 bg-success mx-2 mb-2" v-for="board in boards" :key="board._id">
+        <div class="row text-center">
+          <div class="col">
+            <router-link class="text-center" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
+            </router-link>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <img src="../assets/circle-sloth.svg" alt="" style="height:5em;">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <button @click="deleteBoard(board._id)">DELETE BOARD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 
