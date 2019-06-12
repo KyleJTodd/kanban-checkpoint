@@ -24,7 +24,9 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: [],
+    tasks: {}
   },
   mutations: {
     setUser(state, user) {
@@ -32,6 +34,13 @@ export default new Vuex.Store({
     },
     setBoards(state, boards) {
       state.boards = boards
+    },
+    setLists(state, lists) {
+      state.lists = lists
+    },
+    setTasks(state, data) {
+      Vue.set(state.tasks, data.listId, data.tasks)
+
     }
   },
   actions: {
@@ -47,7 +56,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          // router.push({ name: 'boards' })
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -60,12 +69,18 @@ export default new Vuex.Store({
           router.push({ name: 'boards' })
         })
     },
+    logout({ commit, dispatch }) {
+      auth.delete('logout')
+        .then(res => {
+          router.push({ name: 'login' })
+        })
+    },
     //#endregion
 
 
     //#region -- BOARDS --
-    getBoards({ commit, dispatch }) {
-      api.get('boards')
+    async getBoards({ commit, dispatch }) {
+      await api.get('boards')
         .then(res => {
           commit('setBoards', res.data)
         })
@@ -81,12 +96,55 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getBoards')
         })
+    },
+    //#endregion
+
+
+    //#region -- LISTS --
+    async getLists({ commit, dispatch }, id) {
+      await api.get('boards/' + id + '/lists')
+        .then(res => {
+          commit('setLists', res.data)
+        })
+    },
+    addList({ commit, dispatch }, listData) {
+      api.post('lists', listData)
+        .then(serverList => {
+
+          dispatch('getLists', listData.boardId)
+        })
+    },
+    deleteList({ commit, dispatch }, listId) {
+      api.delete('lists/' + listId)
+        .then(res => {
+          dispatch('getLists', listId)
+        })
+    },
+    async createTask({ commit, dispatch }, payload) {
+      await api.post('tasks', payload)
+        .then(res => {
+          dispatch('getTasks', payload.listId)
+        })
+    },
+    async getTasks({ commit, dispatch }, listId) {
+      await api.get('lists/' + listId + '/tasks')
+        .then(res => {
+          commit('setTasks', { listId, tasks: res.data })
+        })
+    },
+    async moveTask({ commit, dispatch }, data) {
+
+      let res = await api.put('tasks/' + data.task._id, data.task)
+        .then(res => {
+          dispatch('getTasks', data.task.listId)
+          dispatch('getTasks', data.oldId)
+        })
     }
     //#endregion
 
 
     //#region -- LISTS --
-
+    // if(!state.listId[listId.])
 
 
     //#endregion

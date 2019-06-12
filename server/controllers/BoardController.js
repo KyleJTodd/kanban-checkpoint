@@ -7,6 +7,7 @@ import ListService from '../services/ListService'
 //import service and create an instance
 let _service = new BoardService()
 let _repo = _service.repository
+let _listRepo = new ListService().repository
 
 //PUBLIC
 export default class BoardsController {
@@ -26,8 +27,14 @@ export default class BoardsController {
     next({ status: 404, message: 'No Such Board Route' })
   }
   async getListByBoardId(req, res, next) {
-    let data = await _repo.find({ _id: req.params.id })
-    return res.send(data)
+    try {
+      let data = await _listRepo.find({ boardId: req.params.id })
+      return res.send(data)
+    } catch (error) {
+      console.error(error)
+      next(error)
+    }
+
   }
 
   async getAll(req, res, next) {
@@ -65,7 +72,8 @@ export default class BoardsController {
 
   async delete(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      let board = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
+      await board.remove()
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

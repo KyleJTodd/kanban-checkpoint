@@ -13,16 +13,11 @@
       </form>
     </div>
     <div class="row justify-content-center mt-5">
-      <div class="col-2 rounded-circle p-3 bg-success mx-2 mb-2" v-for="board in boards" :key="board._id">
+      <div class="col-2 p-3 mx-2 mb-2 bg-board" v-for="board in boards" :key="board._id">
         <div class="row text-center">
           <div class="col">
             <router-link class="text-center" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
             </router-link>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <img src="../assets/circle-sloth.svg" alt="" style="height:5em;">
           </div>
         </div>
         <div class="row">
@@ -72,3 +67,11 @@
     }
   };
 </script>
+
+<style>
+  .bg-board {
+    background-image: url("../assets/sloth-circle.png");
+    background-size: cover;
+    height: 28vh;
+  }
+</style>

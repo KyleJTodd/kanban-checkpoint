@@ -1,10 +1,12 @@
 import ListService from '../services/ListService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
+import TaskService from '../services/TaskService';
 
 //import service and create an instance
 let _service = new ListService()
 let _repo = _service.repository
+let _taskRepo = new TaskService().repository
 
 //PUBLIC
 export default class ListsController {
@@ -36,7 +38,7 @@ export default class ListsController {
   async getTaskByListId(req, res, next) {
     try {
       //only gets Tasks by user who is logged in
-      let data = await _repo.find({ listId: req.params.id })
+      let data = await _taskRepo.find({ listId: req.params.id })
       return res.send(data)
     }
     catch (err) { next(err) }
@@ -69,7 +71,8 @@ export default class ListsController {
 
   async delete(req, res, next) {
     try {
-      await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      let list = await _repo.findOne({ _id: req.params.id, authorId: req.session.uid })
+      await list.remove()
       return res.send("Successfully deleted")
     } catch (error) { next(error) }
   }

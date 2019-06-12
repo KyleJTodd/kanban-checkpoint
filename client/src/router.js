@@ -25,6 +25,11 @@ export default new Router({
       component: Login
     },
     {
+      path: '/template',
+      name: "template",
+      component:: Template
+    },
+    {
       path: "*",
       redirect: '/'
     }

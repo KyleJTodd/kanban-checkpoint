@@ -16,7 +16,7 @@ _schema.pre('remove', function (next) {
   //lets find all the lists and remove them
   this._id //THIS IS THE BOARD
   Promise.all([
-    //Tasks.deleteMany({ boardId: this._id }),
+    // _taskRepo.deleteMany({ listId: this._id }),
     _listRepo.deleteMany({ boardId: this._id })
   ])
     .then(() => next())
