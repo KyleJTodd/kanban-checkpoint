@@ -40,6 +40,7 @@ export default new Vuex.Store({
     },
     setTasks(state, data) {
       Vue.set(state.tasks, data.listId, data.tasks)
+      console.log(state.tasks)
 
     }
   },
@@ -83,6 +84,7 @@ export default new Vuex.Store({
       await api.get('boards')
         .then(res => {
           commit('setBoards', res.data)
+
         })
     },
     addBoard({ commit, dispatch }, boardData) {
@@ -114,10 +116,10 @@ export default new Vuex.Store({
           dispatch('getLists', listData.boardId)
         })
     },
-    deleteList({ commit, dispatch }, listId) {
-      api.delete('lists/' + listId)
+    deleteList({ commit, dispatch }, list) {
+      api.delete('lists/' + list._id)
         .then(res => {
-          dispatch('getLists', listId)
+          dispatch('getLists', list.boardId)
         })
     },
     async createTask({ commit, dispatch }, payload) {
@@ -127,9 +129,11 @@ export default new Vuex.Store({
         })
     },
     async getTasks({ commit, dispatch }, listId) {
+
       await api.get('lists/' + listId + '/tasks')
         .then(res => {
           commit('setTasks', { listId, tasks: res.data })
+
         })
     },
     async moveTask({ commit, dispatch }, data) {
@@ -139,14 +143,20 @@ export default new Vuex.Store({
           dispatch('getTasks', data.task.listId)
           dispatch('getTasks', data.oldId)
         })
-    }
-    //#endregion
+    },
+    deleteTask({ commit, dispatch }, data) {
+      api.delete('tasks/' + data.taskId)
+        .then(res => {
+          dispatch('getTasks', data.listId)
+        })
+    },
+    async updateTask({ commit, dispatch }, task) {
+      let res = await api.put('tasks/' + task._id, task)
+        .then(res => {
+          dispatch('getTasks', task.listId)
+        })
+    },
 
 
-    //#region -- LISTS --
-    // if(!state.listId[listId.])
-
-
-    //#endregion
   }
 })

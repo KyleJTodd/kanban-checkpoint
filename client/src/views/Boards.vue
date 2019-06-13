@@ -42,6 +42,7 @@
     },
     mounted() {
       this.$store.dispatch("getBoards");
+
     },
     data() {
       return {

@@ -14,7 +14,7 @@
         <router-link to="/template">Template</router-link>
       </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
       <div id="app" class="col-12">
         <router-view />
       </div>

@@ -1,17 +1,16 @@
 <template>
-  <div class="col-2 mx-5 list bg-cover rounded border">
-    <div class="row justify-content-center">
-      <div class="col-11 ">
-        <div class="row">
-          <div class="col-12">
-            <h4>{{list.title}}</h4>
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-1 list-group h-90 bg-info">
+    <div class="row m-1 h-90 bg-light justify-content-center">
+      <div class="col-11 my-3 align-items-center">
+        <div class="row justify-content-center">
+          <div class="col p-0 align-self-center">
+            <h3 class="text-center m-0">{{list.title}}</h3>
+          </div>
+          <div class="col-2 text-center p-0 align-self-center"><i @click="deleteList" class="fas fa-minus-circle"></i>
           </div>
         </div>
-        <div class="row">
-          <task :id="list._id" :boardId="list.boardId">
-
-          </task>
-        </div>
+        <task :id="list._id" :boardId="list.boardId">
+        </task>
       </div>
     </div>
   </div>
@@ -35,6 +34,11 @@
         return (this.$store.state.tasks.listId)
       }
     },
+    methods: {
+      deleteList(id) {
+        return this.$store.dispatch("deleteList", this.list)
+      }
+    },
     components: {
       Task,
     }
@@ -43,6 +47,10 @@
 </script>
 
 <style scoped>
+  i:hover {
+    color: maroon
+  }
+
   .list {
     background-image: url("../assets/tree.svg");
     background-size: contain;
