@@ -1,6 +1,6 @@
 <template>
   <div class="board container-fluid">
-    <div class="row">{{board.title}}</div>
+    <div class="row"><strong>{{board.title}}</strong>: {{board.description}}</div>
     <div class="row">
       <div class="col-12">
         <form @submit.prevent="handleSubmit">

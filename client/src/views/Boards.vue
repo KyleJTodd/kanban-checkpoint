@@ -1,30 +1,42 @@
 <template>
   <div class="boards container-fluid">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mt-5 ">
       <div class="col align-self-center">
-        <h1 class="text-center">Time to Branch Out</h1>
+        <h1 class="text-center">{{user.name}}'s Branches</h1>
       </div>
     </div>
     <div class="row justify-content-center">
-      <form @submit.prevent="addBoard">
-        <input type="text" placeholder="title" v-model="newBoard.title" required>
-        <input type="text" placeholder="description" v-model="newBoard.description">
-        <button type="submit">Create New Branch</button>
-      </form>
+      <div class="col-8 p-3 bg-info rounded">
+        <h3 class="text-white">Add a New Branch</h3>
+        <form @submit.prevent="addBoard">
+          <input class="form-control m-1 px-2" type="text" placeholder="title" v-model="newBoard.title" required>
+          <textarea class="form-control m-1" type="text" rows=3 placeholder="description"
+            v-model="newBoard.description"></textarea>
+          <button type="submit" class="btn btn-success m-1 rounded-circle"><i class=" fas fa-plus-circle"></i></button>
+        </form>
+      </div>
+
     </div>
     <div class="row justify-content-center mt-5">
       <div class="col-2 p-3 mx-2 mb-2 bg-board" v-for="board in boards" :key="board._id">
-        <div class="row text-center">
-          <div class="col">
-            <router-link class="text-center" :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}
-            </router-link>
+        <div class="row board-btn rounded mx-auto p-0 ">
+          <div class="col-12">
+            <div class="row justify-content-center">
+              <div class="col-10 p-0">
+                <router-link :to="{name: 'board', params: {boardId: board._id}}">
+                  <h6 class="text-white align-self-center m-0 my-2">{{board.title}}</h6>
+                </router-link>
+              </div>
+              <div class="col-2 p-0">
+                <i @click="deleteBoard(board._id)" class="fas fa-minus-circle text-white my-2"></i>
+              </div>
+            </div>
           </div>
+
+
+
         </div>
-        <div class="row">
-          <div class="col">
-            <button @click="deleteBoard(board._id)">DELETE BOARD</button>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -55,6 +67,9 @@
     computed: {
       boards() {
         return this.$store.state.boards;
+      },
+      user() {
+        return this.$store.state.user;
       }
     },
     methods: {
@@ -74,5 +89,26 @@
     background-image: url("../assets/sloth-circle.png");
     background-size: cover;
     height: 28vh;
+  }
+
+  .board-btn {
+    width: 100%;
+    background-color: #17a2b88a;
+  }
+
+  .text-white {
+    text-shadow: 1px 0px 8px rgb(31, 31, 31);
+  }
+
+  .fa-minus-circle:hover {
+    color: #e75162 !important;
+  }
+
+  .fa-plus-circle {
+    font-size: 2rem;
+  }
+
+  .fa-plus-circle:hover {
+    color: #a8f361 !important;
   }
 </style>

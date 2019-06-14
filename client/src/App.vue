@@ -14,8 +14,8 @@
         <router-link to="/template">Template</router-link>
       </div>
     </div>
-    <div class="row mt-3">
-      <div id="app" class="col-12">
+    <div class="row">
+      <div id="app" class="col-12 p-0">
         <router-view />
       </div>
     </div>

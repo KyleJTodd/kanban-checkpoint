@@ -1,21 +1,31 @@
 <template>
-  <div class="login">
-    <form v-if="loginForm" @submit.prevent="loginUser">
-      <input type="email" v-model="creds.email" placeholder="email">
-      <input type="password" v-model="creds.password" placeholder="password">
-      <button>Login</button>
-    </form>
-
-    <form v-else @submit.prevent="register">
-      <input type="text" v-model="newUser.name" placeholder="name">
-      <input type="email" v-model="newUser.email" placeholder="email">
-      <input type="password" v-model="newUser.password" placeholder="password">
-      <button type="submit">Create Account</button>
-    </form>
-    <div class="action" @click="loginForm = !loginForm">
-      <p v-if="loginForm">No account? Click here to Register</p>
-      <p v-else>Already have an account? Click here to Login</p>
+  <div class="login container-fluid p-0" style="height: 100vh">
+    <div class="row justify-content-center">
+      <div class="col-8 my-5">
+        <h3>Welcome to Sloth where everything is slow, furry, and adorable!</h3>
+      </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-6">
+        <form v-if="loginForm" @submit.prevent="loginUser">
+          <input class="form-control m-1" type="email" v-model="creds.email" placeholder="email">
+          <input class="form-control m-1" type="password" v-model="creds.password" placeholder="password">
+          <button class="btn btn-info m-1">Login</button>
+        </form>
+
+        <form v-else @submit.prevent="register">
+          <input class="form-control m-1" type="text" v-model="newUser.name" placeholder="name">
+          <input class="form-control m-1" type="email" v-model="newUser.email" placeholder="email">
+          <input class="form-control m-1" type="password" v-model="newUser.password" placeholder="password">
+          <button class="btn btn-info m-1" type="submit">Create Account</button>
+        </form>
+        <div class="action" @click="loginForm = !loginForm">
+          <p v-if="loginForm">No account? Click here to <strong>Register</strong></p>
+          <p v-else>Already have an account? Click here to <strong>Login</strong></p>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </template>
@@ -56,5 +66,10 @@
 <style>
   .action {
     cursor: pointer;
+  }
+
+  .login {
+    background: linear-gradient(180deg, #62d4e8 0%, rgba(139, 195, 74, 0.4) 100%), url(../assets/bg-login.jpg);
+    background-size: cover;
   }
 </style>

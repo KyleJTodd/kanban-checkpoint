@@ -48,7 +48,7 @@
 
 <style scoped>
   i:hover {
-    color: maroon
+    color: #e75162;
   }
 
   .list {
