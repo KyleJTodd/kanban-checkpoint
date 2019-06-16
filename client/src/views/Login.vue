@@ -69,7 +69,7 @@
   }
 
   .login {
-    background: linear-gradient(180deg, #62d4e8 0%, rgba(139, 195, 74, 0.4) 100%), url(../assets/bg-login.jpg);
+    background: linear-gradient(180deg, #fff 0%, #62d4e859 100%), url(../assets/bg-login.jpg);
     background-size: cover;
   }
 </style>

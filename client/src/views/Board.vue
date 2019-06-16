@@ -1,14 +1,21 @@
 <template>
-  <div class="board container-fluid">
-    <div class="row"><strong>{{board.title}}</strong>: {{board.description}}</div>
+  <div class="board container-fluid mt-3">
     <div class="row">
-      <div class="col-12">
-        <form @submit.prevent="handleSubmit">
-          <input type="text" v-model="title" class="form-control">
-          <button type="submit">Add List</button></form>
+      <div class="col-12 mt-3">
+        <h3><strong>{{board.title}}</strong>:</h3>
+      </div>
+      <div class="col-12 mb-3">
+        <h5>{{board.description}}</h5>
       </div>
     </div>
-    <div class="row justify-content-around">
+    <div class="row justify-content-center ">
+      <div class="col-4 justify-content-center mb-3">
+        <form @submit.prevent="handleSubmit">
+          <input type="text" v-model="title" class="form-control">
+          <button class="btn btn-info mt-2" type="submit">Add List</button></form>
+      </div>
+    </div>
+    <div class="row justify-content-around pb-3">
       <list v-for="list in lists" :list='list'></list>
 
     </div>
@@ -63,3 +70,14 @@
     }
   };
 </script>
+<style>
+  .board {
+    background-image: url('../assets/bg-board.png');
+    background-repeat: repeat;
+    background-size: cover;
+    height: 100vh;
+    background-position-y: 113px;
+    background-position-x: -55vw;
+    background-attachment: fixed;
+  }
+</style>

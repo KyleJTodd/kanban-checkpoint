@@ -2,7 +2,8 @@
   <div class="boards container-fluid">
     <div class="row justify-content-center mt-5 ">
       <div class="col align-self-center">
-        <h1 class="text-center">{{user.name}}'s Branches</h1>
+        <h1 v-if="!this.$store.state.user._id" class="text-center">Branches</h1>
+        <h1 v-else class="text-center">{{user.name}}'s Branches</h1>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -12,7 +13,7 @@
           <input class="form-control m-1 px-2" type="text" placeholder="title" v-model="newBoard.title" required>
           <textarea class="form-control m-1" type="text" rows=3 placeholder="description"
             v-model="newBoard.description"></textarea>
-          <button type="submit" class="btn btn-success m-1 rounded-circle"><i class=" fas fa-plus-circle"></i></button>
+          <button type="submit" class="btn btn-outline-info m-1"><i class=" fas fa-plus-circle"></i></button>
         </form>
       </div>
 
@@ -84,11 +85,12 @@
   };
 </script>
 
-<style>
+<style scoped>
   .bg-board {
     background-image: url("../assets/sloth-circle.png");
     background-size: cover;
-    height: 28vh;
+    height: 16vw;
+
   }
 
   .board-btn {
@@ -106,9 +108,13 @@
 
   .fa-plus-circle {
     font-size: 2rem;
+    color: #fff !important;
   }
 
   .fa-plus-circle:hover {
-    color: #a8f361 !important;
+    font-size: 2rem;
+    color: rgb(61, 235, 18) !important;
+    text-shadow: 1px 0px 8px rgb(155, 155, 155);
+
   }
 </style>

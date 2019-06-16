@@ -1,21 +1,29 @@
 <template>
   <div class="container-fluid">
-    <div class="row nav-bg" style="height: 10vh;">
-      <div class="col">
-        <router-link to="/board">Boards</router-link>
+    <div class="row nav-bg text-white" id="navbar" style="height: 10vh;">
+      <div class="col justify-content-center  align-items-center d-flex">
+        <router-link class="text-center navlinks" to="/board">
+          <h6><i class="fas fa-border-all"></i> Boards</h6>
+        </router-link>
       </div>
-      <div class="col">
-        <router-link to="/login">Login</router-link>
+      <div class="col d-flex justify-content-end p-0 ">
+        <img class="sloth" src="./assets/sloth.svg" alt="">
       </div>
-      <div class="col">
-        <button class="btn" @click="logoutUser">Logout</button>
+      <div class="col p-0 pl-1">
+
+        <h6 class="logo m-0 d-block">sloth</h6>
+
       </div>
-      <div class="col">
-        <router-link to="/template">Template</router-link>
+
+      <div class="col justify-content-center align-items-center d-flex">
+        <h6 class="navlinks" @click="logoutUser">
+          <i class="far fa-user"></i> Logout
+        </h6>
       </div>
     </div>
-    <div class="row">
+    <div class="row mt-3">
       <div id="app" class="col-12 p-0">
+
         <router-view />
       </div>
     </div>
@@ -34,24 +42,33 @@
 </script>
 
 <style>
-  .row {
-    outline: 2px solid blue;
+  router-link {
+    color: white !important;
   }
 
-  .col,
-  .col-1,
-  .col-2,
-  .col-3,
-  .col-4,
-  .col-5,
-  .col-6,
-  .col-7,
-  .col-8,
-  .col-9,
-  .col-10,
-  .col-11,
-  .col-12 {
-    outline: 1px solid red;
+  .sloth {
+    height: 4rem;
+    transform: translateY(.7vw);
+
+  }
+
+
+
+
+  .navlinks {
+    color: white;
+
+  }
+
+  .logo {
+    font-family: 'Baloo Paaji', cursive;
+    font-size: 3.7rem;
+  }
+
+  .navlinks:hover {
+    color: maroon;
+    text-shadow: 1px 0px 8px rgb(255, 255, 255);
+    text-decoration: none;
   }
 
   #app {
@@ -59,7 +76,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: #3a3d41;
 
   }
 
@@ -67,16 +84,27 @@
     padding: 30px;
   }
 
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
+
+
+  #navbar {
+    color: white !important;
+    font-family: "Comfortaa", cursive;
   }
 
-  #nav a.router-link-exact-active {
-    color: #42b983;
+  #nav a {
+    font-family: "Comfortaa", cursive;
+    font-weight: bold;
+    color: white;
   }
+
+  /* #nav a.router-link-exact-active {
+    font-family: "Comfortaa", cursive;
+    color: white;
+  } */
 
   .nav-bg {
-    background: #5ec8d6;
+    /* background: #17a2b8; */
+    background-image: url("./assets/bg-nav.png");
+    background-size: contain;
   }
 </style>

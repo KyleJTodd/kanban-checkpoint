@@ -1,12 +1,13 @@
 <template>
-  <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-1 list-group h-90 bg-info">
-    <div class="row m-1 h-90 bg-light justify-content-center">
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 p-1 list-group bg-info">
+    <div class="row m-1 bg-light justify-content-center">
       <div class="col-11 my-3 align-items-center">
-        <div class="row justify-content-center">
-          <div class="col p-0 align-self-center">
+        <div class="row justify-content-center  border-bottom border-info mb-1">
+          <div class="col p-0 align-self-center mb-1">
             <h3 class="text-center m-0">{{list.title}}</h3>
           </div>
-          <div class="col-2 text-center p-0 align-self-center"><i @click="deleteList" class="fas fa-minus-circle"></i>
+          <div class="col-2 mb-1 text-center p-0 align-self-center"><i @click="deleteList"
+              class="fas fa-minus-circle"></i>
           </div>
         </div>
         <task :id="list._id" :boardId="list.boardId">
@@ -15,6 +16,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
   import Task from "../components/Task.vue"
@@ -47,6 +49,10 @@
 </script>
 
 <style scoped>
+  i {
+    color: #17a2b8;
+  }
+
   i:hover {
     color: #e75162;
   }

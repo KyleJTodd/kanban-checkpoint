@@ -1,12 +1,6 @@
 <template>
-  <div>
-    <div class="row" v-for="task in tasks">
-      <div class="col-7 p-0">
-        <h3 class="text-left">{{task.title}}</h3>
-      </div>
-      <div class="col"><button @click="deleteTask(task._id)" class="btn btn-outline-info p-0"><i
-            class="fas fa-minus-circle"></i></button>
-      </div>
+  <div class="mt-2">
+    <div class="row border-bottom border-info mt-2" v-for="task in tasks">
       <div class="col-2 p-0">
         <div class="dropdown mr-1">
           <button type="button" class="btn btn-outline-info dropdown-toggle" id="dropdownMenuOffset"
@@ -21,33 +15,40 @@
           </div>
         </div>
       </div>
+      <div class="col-8 p-0 align-self-center">
+        <h6 class="text-left pl-4 m-0">{{task.title}}</h6>
+      </div>
+      <div class="col-2 text-center align-self-center p-0"><i @click="deleteTask(task._id)"
+          class="fas fa-minus-circle p-0"></i>
+      </div>
 
       <div class="col-12 my-2">
         <div class="row justify-content-between" v-for="(comment, i) in task.comments">
           <div class="col-10 p-0">
-            <h6 class="text-left">{{comment.content}}</h6>
+            <h6 class="text-left m-0 comment"><em>"{{comment.content}}"</em></h6>
           </div>
-          <div class="col-1 p-0"><button @click="deleteComment(i, task)" class="btn btn-outline-info p-0"><i
-                class="fas fa-minus-circle"></i></button>
+          <div class="col-2 p-0"><i @click="deleteComment(i, task)" class="fas fa-minus-circle p-0"></i>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <form class="form-row" @submit.prevent="addComment(task)">
-            <!-- <div class="col-10 p-0"> -->
-            <input class="col-10 form-control p-0" id="task._id" type="text" v-model="comment.content">
-            <!-- </div> -->
-            <button type="submit" class="p-0 col-2 btn btn-outline-info"><i class="fas fa-plus-circle"></i></button>
+        <div class="row p-0 mt-3">
+          <form class="form-row p-0" @submit.prevent="addComment(task)">
+            <div class="col-10 p-0 pr-3">
+              <input class="col-10 form-control m-0 ml-3 p-0" id="task._id" type="text" v-model="comment.content"></div>
+            <div class="col-2 p-0">
+              <button type="submit" class="btn btn-outline-light"><i class="fas fa-plus-circle"></i></button>
+            </div>
           </form>
         </div>
       </div>
     </div>
-
-    <div class="row margin-top">
-      <div class="col-10">
+    <div class="row mt-2 margin-top justify-content-center">
+      <div class="col-11">
         <form @submit.prevent="handleSubmit">
-          <input class="form-control" type="text" placeholder="Title" v-model="title">
+          <input class="form-control mb-2" type="text" placeholder="Title" v-model="title">
           <input class="form-control" type="text" placeholder="Description" v-model="description">
-          <button type="submit">Create LeafNote</button>
+          <button class="btn btn-info mt-2
+          
+          " type="submit">Create LeafNote</button>
         </form>
       </div>
     </div>
@@ -132,8 +133,28 @@
 
 
 <style>
+  .fa-minus-circle {
+    color: #17a2b8 !important;
+  }
 
+  .fa-plus-circle {
+    color: #17a2b8 !important;
+    font-size: 1.2rem;
 
+  }
+
+  .fa-minus-circle:hover {
+    color: #e75162 !important;
+  }
+
+  .fa-plus-circle:hover {
+    color: #6a9625 !important;
+    font-size: 1.2rem;
+  }
+
+  .comment {
+    color: #afafaf;
+  }
 </style>
 
 
