@@ -2,7 +2,8 @@
   <div class="login container-fluid p-0" style="height: 100vh">
     <div class="row justify-content-center">
       <div class="col-8 my-5">
-        <h3>Welcome to Sloth where everything is slow, furry, and adorable!</h3>
+        <h3>Welcome to Sloth!</h3>
+        <small>keep all your slow moving thoughts in one convenient place</small>
       </div>
     </div>
     <div class="row justify-content-center">

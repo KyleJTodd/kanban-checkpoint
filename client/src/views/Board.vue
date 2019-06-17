@@ -7,6 +7,9 @@
       <div class="col-12 mb-3">
         <h5>{{board.description}}</h5>
       </div>
+      <div class="col-12 mb-3">
+        <small>use the leaf to move your tasks from one list to the next</small>
+      </div>
     </div>
     <div class="row justify-content-center ">
       <div class="col-4 justify-content-center mb-3">
@@ -72,9 +75,8 @@
 </script>
 <style>
   .board {
-    background-image: url('../assets/bg-board.png');
+    background-image: url('../assets/bg-board.svg');
     background-repeat: repeat;
-    background-size: cover;
     height: 100vh;
     background-position-y: 113px;
     background-position-x: -55vw;

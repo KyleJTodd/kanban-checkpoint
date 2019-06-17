@@ -1,9 +1,10 @@
 <template>
   <div class="boards container-fluid">
-    <div class="row justify-content-center mt-5 ">
+    <div class="row justify-content-center my-5 ">
       <div class="col align-self-center">
         <h1 v-if="!this.$store.state.user._id" class="text-center">Branches</h1>
         <h1 v-else class="text-center">{{user.name}}'s Branches</h1>
+        <small class="m-3">this is where all your ideas branch into life</small>
       </div>
     </div>
     <div class="row justify-content-center">

@@ -33,7 +33,8 @@
         <div class="row p-0 mt-3">
           <form class="form-row p-0" @submit.prevent="addComment(task)">
             <div class="col-10 p-0 pr-3">
-              <input class="col-10 form-control m-0 ml-3 p-0" id="task._id" type="text" v-model="comment.content"></div>
+              <input class="col-10 form-control m-0 ml-3 p-0" placeholder="Add a comment.." id="task._id" type="text"
+                v-model="comment.content"></div>
             <div class="col-2 p-0">
               <button type="submit" class="btn btn-outline-light"><i class="fas fa-plus-circle"></i></button>
             </div>
@@ -48,7 +49,7 @@
           <input class="form-control" type="text" placeholder="Description" v-model="description">
           <button class="btn btn-info mt-2
           
-          " type="submit">Create LeafNote</button>
+          " type="submit">Create Task</button>
         </form>
       </div>
     </div>
