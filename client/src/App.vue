@@ -42,6 +42,17 @@
 </script>
 
 <style>
+  body {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+  }
+
+
   router-link {
     color: white !important;
   }
